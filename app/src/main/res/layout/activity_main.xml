@@ -53,7 +53,8 @@
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_more_vert_24" />
+        app:srcCompat="@drawable/ic_baseline_more_vert_24"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier"
@@ -81,66 +82,67 @@
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="content"
-        app:barrierMargin="@dimen/Pading_post"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="266dp" />
+        app:barrierMargin="@dimen/Pading_post" />
 
     <ImageButton
         android:id="@+id/like"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="@dimen/posts_avatar_size"
+        android:layout_height="@dimen/posts_avatar_size"
         android:background="@android:color/transparent"
         android:contentDescription="@string/counter_like"
         app:layout_constraintStart_toStartOf="@+id/content"
         app:layout_constraintTop_toBottomOf="@+id/barrier_content"
-
         app:srcCompat="@drawable/ic_baseline_favorite_border_24" />
 
     <TextView
-        android:id="@+id/counter_like"
+        android:id="@+id/likeCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/Pading_post"
-        android:text="@string/counter_like"
-        app:layout_constraintStart_toEndOf="@+id/like"
-        app:layout_constraintTop_toBottomOf="@+id/barrier_content" />
+        tools:text="@sample/post.json/data/like"
+        android:layout_marginStart="@dimen/text_spacing"
+        android:layout_marginTop="@dimen/Pading_post"
+        app:layout_constraintTop_toBottomOf="@id/barrier_content"
+        app:layout_constraintStart_toEndOf="@+id/like" />
 
     <ImageButton
         android:id="@+id/share"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="@dimen/posts_avatar_size"
+        android:layout_height="@dimen/posts_avatar_size"
         android:background="@android:color/transparent"
         android:contentDescription="@string/counter_shared"
-        app:layout_constraintStart_toEndOf="@+id/counter_like"
+        app:layout_constraintStart_toEndOf="@+id/likeCount"
         app:layout_constraintTop_toBottomOf="@+id/barrier_content"
         app:srcCompat="?attr/actionModeShareDrawable" />
 
     <TextView
-        android:id="@+id/counter_shared"
+        android:id="@+id/shareCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:text="@string/counter_shared"
-        app:layout_constraintStart_toEndOf="@+id/share"
-        app:layout_constraintTop_toBottomOf="@+id/barrier_content" />
+        tools:text="@sample/post.json/data/share"
+        android:layout_marginStart="@dimen/text_spacing"
+        android:layout_marginTop="@dimen/Pading_post"
+        app:layout_constraintTop_toBottomOf="@id/barrier_content"
+        app:layout_constraintStart_toEndOf="@+id/share" />
 
     <ImageButton
         android:id="@+id/view"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="@dimen/posts_avatar_size"
+        android:layout_height="@dimen/posts_avatar_size"
         android:background="@android:color/transparent"
         android:contentDescription="@string/counter_view"
-        app:layout_constraintEnd_toStartOf="@+id/counter_view"
+        app:layout_constraintEnd_toStartOf="@+id/viewsCount"
         app:layout_constraintTop_toBottomOf="@+id/barrier_content"
         app:srcCompat="@drawable/ic_baseline_preview_24" />
 
     <TextView
-        android:id="@+id/counter_view"
+        android:id="@+id/viewsCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/counter_view"
-        app:layout_constraintEnd_toEndOf="@+id/content"
-        app:layout_constraintTop_toBottomOf="@+id/barrier_content" />
+        tools:text=""
+        android:layout_marginStart="@dimen/text_spacing"
+        android:layout_marginTop="@dimen/Pading_post"
+        app:layout_constraintTop_toBottomOf="@id/barrier_content"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

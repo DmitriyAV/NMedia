@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">NMedia</string>
     <string name="nmedia">NMedia!</string>
-    <string name="counter_like">1000</string>
-    <string name="counter_shared">500</string>
-    <string name="counter_view">500</string>
+    <string name="counter_like" translatable="false">1000</string>
+    <string name="counter_shared" translatable="false">500</string>
+    <string name="counter_view" translatable="false">500</string>
 </resources>
