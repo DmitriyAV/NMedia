@@ -41,10 +41,10 @@ object PostService {
         }
     }
 
-    private fun division(counterForPrint: Double): String {
+    private fun division(counter: Double): String {
         val df = DecimalFormat("#.#")
         df.roundingMode = RoundingMode.FLOOR
-        return df.format(counterForPrint/1000).toDouble().toString()
+        return df.format(counter/1000).toString()
     }
 
 

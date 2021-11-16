@@ -2,6 +2,7 @@ package ru.netologia.nmedia
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import ru.netologia.nmedia.databinding.ActivityMainBinding
 import ru.netologia.nmedia.dto.Post
 import ru.netologia.nmedia.dto.PostService
@@ -39,6 +40,7 @@ class MainActivity : AppCompatActivity() {
                 like.setImageResource(R.drawable.ic_baseline_favorite_border_24)
             }
             like.setOnClickListener {
+                Log.d("click Like", "like")
                 post.likedByMe = !post.likedByMe
                 if (post.likedByMe) {
                     like?.setImageResource(R.drawable.ic_liked_24)
@@ -48,17 +50,18 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 if (post.likedByMe) {
-                    post.like + 1
+                    post.like++
                 } else {
-                    post.like - 1
+                    post.like--
                 }
                 likeCount.text = PostService.checkCounter(post.like)
             }
 
             share.setOnClickListener {
-                    post.sher + 1
-                }
+                Log.d("click share", "share")
+                    post.sher++
                 shareCount.text = PostService.checkCounter(post.sher)
+                }
             }
         }
     }
