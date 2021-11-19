@@ -19,10 +19,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(biding.root)
 
         val viewModel: ViewModelPost by viewModels()
-        val adapter = PostAdapter {
-            viewModel.likeById(it.id)
-            viewModel.shareById(it.id)
-        }
+        val adapter = PostAdapter (
+            { viewModel.likeById(it.id) },
+            { viewModel.shareById(it.id) }
+        )
         biding.container.adapter = adapter
         viewModel.get().observe(this) { posts ->
             adapter.submitList(posts)

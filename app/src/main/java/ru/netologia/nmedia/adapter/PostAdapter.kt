@@ -10,13 +10,14 @@ import ru.netologia.nmedia.dto.Post
 import ru.netologia.nmedia.dto.PostService
 
 class PostAdapter(
-    private val onPostClicked: (Post) -> Unit
+    private val onPostLiked: (Post) -> Unit,
+    private val onPostShared: (Post) -> Unit
 ) : ListAdapter<Post, PostViewHolder>(PostDiffCallback()) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val biding = CardPostBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return PostViewHolder(biding, onPostClicked)
+        return PostViewHolder(biding, onPostLiked, onPostShared)
     }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
@@ -26,7 +27,8 @@ class PostAdapter(
 
 class PostViewHolder(
     private val biding: CardPostBinding,
-    private val onPostClicked: (Post) -> Unit
+    private val onPostClicked: (Post) -> Unit,
+    private val onPostShared: (Post) -> Unit
 ) : RecyclerView.ViewHolder(biding.root) {
 
     fun bind(post: Post) {
@@ -42,7 +44,7 @@ class PostViewHolder(
                 }
             )
             like.setOnClickListener { onPostClicked(post) }
-            share.setOnClickListener { onPostClicked(post) }
+            share.setOnClickListener { onPostShared(post) }
         }
     }
 }
