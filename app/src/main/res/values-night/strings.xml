@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="remove_post">Remove</string>
+    <string name="edit_post">Edit</string>
+    <string name="error_blank">Content is empty</string>
+</resources>

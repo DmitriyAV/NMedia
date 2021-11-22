@@ -3,7 +3,7 @@ package ru.netologia.nmedia.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import ru.netologia.nmedia.dto.Post
-import ru.netologia.nmedia.dto.PostService
+
 
 class PostRepositoryInMemory : PostRepository {
 
@@ -70,7 +70,7 @@ class PostRepositoryInMemory : PostRepository {
             content = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия — помочь встать на путь роста и начать цепочку перемен → http://netolo.gy/fyb",
             published = "21 мая в 18:36",
             likedByMe = false
-        ),
+        )
     )
 
     private val data: MutableLiveData<List<Post>> = MutableLiveData(posts)
@@ -78,6 +78,7 @@ class PostRepositoryInMemory : PostRepository {
     override fun get(): LiveData<List<Post>> = data
 
     override fun likeById(id: Long) {
+
         data.value = data.value?.map {
             if (it.id == id) {
                 it.copy(
@@ -93,12 +94,34 @@ class PostRepositoryInMemory : PostRepository {
     }
 
     override fun shareById(id: Long) {
+
         data.value = data.value?.map {
             if (it.id == id) {
                 it.copy(
                     sher = it.sher + 1
                 )
             } else it
+        }
+    }
+
+    override fun removeById(id: Long) {
+
+        posts = posts.filter { it.id != id }
+        data.value = posts
+    }
+
+    override fun save(post: Post) {
+        if (post.id == 0L) {
+            posts = listOf(post.copy(id = posts.firstOrNull()?.id?.inc() ?: 0)) + posts
+            data.value = posts
+            return
+        } else {
+            posts = posts.map {
+                if (it.id == post.id) {
+                    it.copy(content = post.content)
+                } else it
+            }
+            data.value = posts
         }
     }
 }

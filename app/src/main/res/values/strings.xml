@@ -4,4 +4,7 @@
     <string name="counter_like" translatable="false">1000</string>
     <string name="counter_shared" translatable="false">500</string>
     <string name="counter_view" translatable="false">500</string>
+    <string name="remove_post">Remove</string>
+    <string name="edit_post">Edit</string>
+    <string name="error_blank">Content is empty</string>
 </resources>
