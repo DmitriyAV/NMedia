@@ -5,4 +5,7 @@
     <string name="remove_post">Удалить</string>
     <string name="edit_post">Изменить</string>
     <string name="error_blank">Пустая строка</string>
+    <string name="like">Like</string>
+    <string name="share">Share</string>
+    <string name="view">View</string>
 </resources>

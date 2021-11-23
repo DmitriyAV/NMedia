@@ -19,6 +19,7 @@ private val empty = Post(
 
 class ViewModelPost : ViewModel() {
     private val repository: PostRepository = PostRepositoryInMemory()
+
     val edited = MutableLiveData(empty)
 
     fun get(): LiveData<List<Post>> = repository.get()

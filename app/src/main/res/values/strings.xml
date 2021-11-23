@@ -7,4 +7,8 @@
     <string name="remove_post">Remove</string>
     <string name="edit_post">Edit</string>
     <string name="error_blank">Content is empty</string>
+    <string name="avatar" translatable="false">Avatar</string>
+    <string name="like">Like</string>
+    <string name="share">Share</string>
+    <string name="view">View</string>
 </resources>

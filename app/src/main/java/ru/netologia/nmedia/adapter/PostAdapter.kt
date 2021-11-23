@@ -32,7 +32,6 @@ class PostAdapter(
 }
 
 class PostViewHolder(
-
     private val biding: CardPostBinding,
     private val listener: PostActionListener
 
@@ -41,12 +40,12 @@ class PostViewHolder(
     fun bind(post: Post) {
 
         with(biding) {
-
             author.text = post.author
             published.text = post.published
             content.text = post.content
-            likeCount.text = PostService.checkCounter(post.like)
-            shareCount.text = PostService.checkCounter(post.sher)
+            like.isCheckable = post.likedByMe
+            like.text = PostService.checkCounter(post.like)
+            share.text = PostService.checkCounter(post.sher)
 
             menu.setOnClickListener {
                 PopupMenu(it.context, it).apply {
@@ -67,13 +66,6 @@ class PostViewHolder(
                 }.show()
             }
 
-            like.setImageResource(
-                if (post.likedByMe) {
-                    R.drawable.ic_liked_24
-                } else {
-                    R.drawable.ic_baseline_favorite_border_24
-                }
-            )
             like.setOnClickListener { listener.likeOnPost(post) }
 
             share.setOnClickListener { listener.shareOnPost(post) }
