@@ -16,7 +16,7 @@ import ru.netologia.nmedia.util.AndroidUtils
 
 
 class MainActivity : AppCompatActivity() {
-    @SuppressLint("ClickableViewAccessibility")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

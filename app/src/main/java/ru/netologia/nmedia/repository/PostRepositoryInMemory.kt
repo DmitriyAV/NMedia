@@ -111,8 +111,10 @@ class PostRepositoryInMemory : PostRepository {
     }
 
     override fun save(post: Post) {
+        val published = "Now"
+        val author = "Me"
         if (post.id == 0L) {
-            posts = listOf(post.copy(id = posts.firstOrNull()?.id?.inc() ?: 0)) + posts
+            posts = listOf(post.copy(id = posts.firstOrNull()?.id?.inc() ?: 0, author = author, published = published)) + posts
             data.value = posts
             return
         } else {
