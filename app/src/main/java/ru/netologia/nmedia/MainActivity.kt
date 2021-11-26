@@ -1,67 +1,94 @@
 package ru.netologia.nmedia
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.core.widget.addTextChangedListener
+import ru.netologia.nmedia.adapter.PostActionListener
+import ru.netologia.nmedia.viewModel.ViewModelPost
+import ru.netologia.nmedia.adapter.PostAdapter
 import ru.netologia.nmedia.databinding.ActivityMainBinding
 import ru.netologia.nmedia.dto.Post
-import ru.netologia.nmedia.dto.PostService
+import ru.netologia.nmedia.util.AndroidUtils
+
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val biding = ActivityMainBinding.inflate(layoutInflater)
 
+        val biding = ActivityMainBinding.inflate(layoutInflater)
 
         setContentView(biding.root)
 
-        val post = Post(
-            id = 1,
-            author = "Нетология. Университет интернет-профессий будущего",
-            published = "21 мая в 18:36",
-            content = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу." +
-                    " Затем появились курсы по дизайну, разработке, аналитике и управлению. " +
-                    "Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов. " +
-                    "Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. " +
-                    "Наша миссия — помочь встать на путь роста и начать цепочку перемен → http://netolo.gy/fyb"
+        val viewModel: ViewModelPost by viewModels()
+        val adapter = PostAdapter(
+            object : PostActionListener {
+                override fun likeOnPost(post: Post) {
+                    viewModel.likeById(post.id)
+                }
+
+                override fun shareOnPost(post: Post) {
+                    viewModel.shareById(post.id)
+                }
+
+                override fun removeOnPost(post: Post) {
+                    viewModel.removeById(post.id)
+                }
+
+                override fun editOnPost(post: Post) {
+                    viewModel.editOnPost(post)
+                }
+            }
         )
+        biding.container.adapter = adapter
+
+        viewModel.data.observe(this, { posts ->
+            adapter.submitList(posts)
+        })
 
         with(biding) {
-            author.text = post.author
-            published.text = post.published
-            content.text = post.content
-            likeCount?.text = PostService.checkCounter(post.like)
-            shareCount?.text = PostService.checkCounter(post.sher)
 
-            if (post.likedByMe){
-                like.setImageResource(R.drawable.ic_liked_24)
-            }
-            else {
-                like.setImageResource(R.drawable.ic_baseline_favorite_border_24)
-            }
-            like.setOnClickListener {
-                Log.d("click Like", "like")
-                post.likedByMe = !post.likedByMe
-                if (post.likedByMe) {
-                    like?.setImageResource(R.drawable.ic_liked_24)
-                }
-                else {
-                    like?.setImageResource(R.drawable.ic_baseline_favorite_border_24)
-                }
+            content.addTextChangedListener {
+                save.visibility = View.VISIBLE
+                clearText.visibility = View.VISIBLE
+                save.setOnClickListener save@{ save ->
 
-                if (post.likedByMe) {
-                    post.like++
-                } else {
-                    post.like--
-                }
-                likeCount.text = PostService.checkCounter(post.like)
-            }
+                    val text = content.text?.toString()
+                    if (text.isNullOrBlank()) {
+                        Toast.makeText(
+                            this@MainActivity,
+                            getString(R.string.error_blank),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        return@save
+                    }
 
-            share.setOnClickListener {
-                Log.d("click share", "share")
-                    post.sher++
-                shareCount.text = PostService.checkCounter(post.sher)
+                    viewModel.edit(text)
+                    viewModel.save()
+                    content.setText("")
+                    content.clearFocus()
+                    group.visibility = View.GONE
+                    AndroidUtils.hideKeyboard(content)
+
+                }
+                clearText.setOnClickListener {
+                    content.setText("")
+                    clearText.visibility = View.GONE
                 }
             }
+            viewModel.edited.observe(this@MainActivity, {
+                if (it.id == 0L) {
+                    return@observe
+                }
+                content.requestFocus()
+                content.setText(it.content)
+
+            })
         }
     }
+}
