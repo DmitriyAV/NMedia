@@ -1,5 +1,6 @@
 package ru.netologia.nmedia.viewModel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -22,9 +23,9 @@ class ViewModelPost : ViewModel() {
 
     val edited = MutableLiveData(empty)
 
-    fun get(): LiveData<List<Post>> = repository.get()
+    val data: LiveData<List<Post>> = repository.get()
 
-    fun likeById(id: Long) = repository.likeById(id)
+    fun likeById(id: Long) { repository.likeById(id) }
 
     fun shareById(id: Long) = repository.shareById(id)
 

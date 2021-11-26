@@ -3,6 +3,7 @@ package ru.netologia.nmedia
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -46,9 +47,9 @@ class MainActivity : AppCompatActivity() {
         )
         biding.container.adapter = adapter
 
-        viewModel.get().observe(this) { posts ->
+        viewModel.data.observe(this, { posts ->
             adapter.submitList(posts)
-        }
+        })
 
         with(biding) {
 
@@ -80,14 +81,14 @@ class MainActivity : AppCompatActivity() {
                     clearText.visibility = View.GONE
                 }
             }
-            viewModel.edited.observe(this@MainActivity) {
+            viewModel.edited.observe(this@MainActivity, {
                 if (it.id == 0L) {
                     return@observe
                 }
                 content.requestFocus()
                 content.setText(it.content)
 
-            }
+            })
         }
     }
 }

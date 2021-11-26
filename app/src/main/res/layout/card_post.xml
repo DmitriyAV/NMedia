@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/Pading_post"
+    android:padding="@dimen/pading_post"
     tools:context=".MainActivity">
 
 
@@ -12,7 +12,7 @@
         android:id="@+id/avatar"
         android:layout_width="81dp"
         android:layout_height="81dp"
-        android:layout_marginEnd="@dimen/Pading_post"
+        android:layout_marginEnd="@dimen/pading_post"
         android:background="@android:color/transparent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -24,7 +24,7 @@
         android:id="@+id/author"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/Pading_post"
+        android:layout_marginStart="@dimen/pading_post"
         android:ellipsize="end"
         android:singleLine="true"
         app:layout_constraintBottom_toBottomOf="@+id/avatar"
@@ -38,7 +38,7 @@
         android:id="@+id/published"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/Pading_post"
+        android:layout_marginStart="@dimen/pading_post"
         app:layout_constraintStart_toEndOf="@+id/avatar"
         app:layout_constraintTop_toBottomOf="@+id/author"
         tools:text="@sample/post.json/data/published" />
@@ -57,8 +57,8 @@
         android:id="@+id/barrier"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/Pading_post"
-        app:barrierMargin="@dimen/Pading_post"
+        android:layout_marginTop="@dimen/pading_post"
+        app:barrierMargin="@dimen/pading_post"
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="avatar, published, menu" />
 
@@ -77,7 +77,7 @@
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="content"
-        app:barrierMargin="@dimen/Pading_post" />
+        app:barrierMargin="@dimen/pading_post" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/like"
@@ -87,8 +87,6 @@
         android:layout_height="wrap_content"
         app:icon="@drawable/like_selector"
         app:iconTint="@color/like_color_selector"
-        android:textColor="@color/base"
-        android:background="@android:color/transparent"
         android:checkable="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/barrier_content"
@@ -100,10 +98,8 @@
         android:contentDescription="@string/share"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:icon="?attr/actionModeShareDrawable"
+        app:icon="@drawable/ic_baseline_share_24"
         app:iconTint="@color/base"
-        android:textColor="@color/base"
-        android:background="@android:color/transparent"
         android:layout_marginStart="@dimen/text_spacing"
         app:layout_constraintStart_toEndOf="@+id/like"
         app:layout_constraintTop_toBottomOf="@+id/barrier_content"

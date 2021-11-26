@@ -1,5 +1,6 @@
 package ru.netologia.nmedia.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.PopupMenu
@@ -38,12 +39,11 @@ class PostViewHolder(
 ) : RecyclerView.ViewHolder(biding.root) {
 
     fun bind(post: Post) {
-
-        with(biding) {
+        biding.apply {
             author.text = post.author
             published.text = post.published
             content.text = post.content
-            like.isCheckable = post.likedByMe
+            like.isChecked = post.likedByMe
             like.text = PostService.checkCounter(post.like)
             share.text = PostService.checkCounter(post.sher)
 
@@ -66,7 +66,8 @@ class PostViewHolder(
                 }.show()
             }
 
-            like.setOnClickListener { listener.likeOnPost(post) }
+            like.setOnClickListener { listener.likeOnPost(post)
+            }
 
             share.setOnClickListener { listener.shareOnPost(post) }
         }
