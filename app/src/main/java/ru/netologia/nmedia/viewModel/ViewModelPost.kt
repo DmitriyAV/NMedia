@@ -1,6 +1,5 @@
 package ru.netologia.nmedia.viewModel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -25,13 +24,15 @@ class ViewModelPost : ViewModel() {
 
     val data: LiveData<List<Post>> = repository.get()
 
-    fun likeById(id: Long) { repository.likeById(id) }
+    fun likeById(id: Long) = repository.likeById(id)
 
     fun shareById(id: Long) = repository.shareById(id)
 
     fun removeById(id: Long) = repository.removeById(id)
 
     fun editOnPost(post: Post) { edited.value = post }
+
+    fun getVideoLink() = repository.videoLink()
 
     fun edit(text: String) {
         val formatted = text.trim()

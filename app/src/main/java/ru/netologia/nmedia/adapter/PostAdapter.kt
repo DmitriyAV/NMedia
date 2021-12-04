@@ -1,7 +1,7 @@
 package ru.netologia.nmedia.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.recyclerview.widget.ListAdapter
@@ -16,6 +16,7 @@ interface PostActionListener {
     fun shareOnPost(post: Post)
     fun removeOnPost(post: Post)
     fun editOnPost(post: Post)
+    fun video(post: Post)
 }
 
 class PostAdapter(
@@ -46,6 +47,13 @@ class PostViewHolder(
             like.isChecked = post.likedByMe
             like.text = PostService.checkCounter(post.like)
             share.text = PostService.checkCounter(post.sher)
+            videoLink.text = post.linkOnYouTube
+
+            if (!post.linkOnYouTube.isNullOrEmpty()) {
+                groupForVideo.visibility = View.VISIBLE
+            } else {
+                groupForVideo.visibility = View.GONE
+            }
 
             menu.setOnClickListener {
                 PopupMenu(it.context, it).apply {
@@ -57,6 +65,7 @@ class PostViewHolder(
                                 true
                             }
                             R.id.edit_post -> {
+
                                 listener.editOnPost(post)
                                 true
                             }
@@ -66,8 +75,9 @@ class PostViewHolder(
                 }.show()
             }
 
-            like.setOnClickListener { listener.likeOnPost(post)
-            }
+            playVideo.setOnClickListener { listener.video(post) }
+
+            like.setOnClickListener { listener.likeOnPost(post) }
 
             share.setOnClickListener { listener.shareOnPost(post) }
         }
