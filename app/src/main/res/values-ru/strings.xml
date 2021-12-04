@@ -6,7 +6,9 @@
     <string name="edit_post">Изменить</string>
     <string name="error_blank">Пустая строка</string>
     <string name="like">Like</string>
-    <string name="share">Share</string>
-    <string name="view">View</string>
-    <string name="save">Save</string>
+    <string name="share">Поделиться</string>
+    <string name="view">Просмотры</string>
+    <string name="save">Сохранить</string>
+    <string name="add_post">Добавить</string>
+    <string name="videoClicked">Видео окно</string>
 </resources>

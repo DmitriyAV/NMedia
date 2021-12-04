@@ -86,7 +86,7 @@
         android:ellipsize="end"
         android:singleLine="true"
         android:autoLink="web"
-        app:layout_constraintBottom_toBottomOf="@+id/barrier_video"
+        app:layout_constraintBottom_toTopOf="@+id/barrier_video"
         app:layout_constraintEnd_toEndOf="@+id/content"
         app:layout_constraintStart_toStartOf="@+id/content"
         app:layout_constraintTop_toBottomOf="@id/barrier_content"
@@ -97,9 +97,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:checkable="false"
-        android:contentDescription="@string/view"
+        android:contentDescription="@string/videoClicked"
         app:icon="@drawable/ic_baseline_play_24"
-        app:iconTint="@color/design_default_color_primary_variant"
+        app:iconTint="@color/base"
         android:autoLink="web"
         app:iconGravity="textStart"
         app:layout_constraintBottom_toTopOf="@id/video_link"
@@ -117,10 +117,15 @@
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group_for_video"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="122dp"
+        android:layout_height="189dp"
         android:visibility="gone"
-        app:constraint_referenced_ids="video_link, play_video" />
+        app:constraint_referenced_ids="video_link, play_video"
+        app:layout_constraintBottom_toBottomOf="@+id/video_link"
+        app:layout_constraintEnd_toEndOf="@+id/content"
+        app:layout_constraintStart_toStartOf="@+id/content"
+        app:layout_constraintTop_toTopOf="@+id/video_link"
+        tools:visibility="visible" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/like"
