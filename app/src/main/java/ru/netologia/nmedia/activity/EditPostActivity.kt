@@ -16,8 +16,6 @@ class EditPostActivity : AppCompatActivity() {
         val biding = ActivityEditPostBinding.inflate(layoutInflater)
         setContentView(biding.root)
 
-        val viewModel: ViewModelPost by viewModels()
-
         with(biding) {
             editPost.requestFocus()
             editPost.setText(intent.getStringExtra(Intent.ACTION_EDIT))
@@ -29,9 +27,6 @@ class EditPostActivity : AppCompatActivity() {
                 } else {
                     val content = editPost.text.toString()
                     intent.putExtra(Intent.ACTION_EDIT, content)
-                    viewModel.edit(content)
-                    viewModel.save()
-
 
                     setResult(Activity.RESULT_OK, intent)
                 }
