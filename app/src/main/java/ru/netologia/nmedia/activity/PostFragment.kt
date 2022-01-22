@@ -31,7 +31,7 @@ class PostFragment : Fragment() {
 
         val viewModel: ViewModelPost by viewModels(ownerProducer = ::requireParentFragment)
 
-        val id: Long by lazy { requireArguments().getLong("userId") }
+        val id = arguments?.longArg
 
         viewModel.data.observe(viewLifecycleOwner) { posts ->
 
