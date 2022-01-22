@@ -4,4 +4,5 @@
     <string name="edit_post">Edit</string>
     <string name="error_blank">Content is empty</string>
     <string name="save">Save</string>
+    <string name="error_empty_content">Contetn shouldn\'t be empty</string>
 </resources>

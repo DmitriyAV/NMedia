@@ -36,6 +36,7 @@ class ViewModelPost(application: Application) : AndroidViewModel(application) {
 
     fun getVideoLink() = repository.videoLink()
 
+
     fun edit(text: String) {
         val formatted = text.trim()
         if (edited.value?.content == formatted){

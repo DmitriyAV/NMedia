@@ -17,6 +17,8 @@ interface PostActionListener {
     fun removeOnPost(post: Post)
     fun editOnPost(post: Post)
     fun video(post: Post)
+    fun getPost(post: Post)
+
 }
 
 class PostAdapter(
@@ -34,13 +36,13 @@ class PostAdapter(
 }
 
 class PostViewHolder(
-    private val biding: CardPostBinding,
+    private val binding: CardPostBinding,
     private val listener: PostActionListener
 
-) : RecyclerView.ViewHolder(biding.root) {
+) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(post: Post) {
-        biding.apply {
+        binding.apply {
             author.text = post.author
             published.text = post.published
             content.text = post.content
@@ -48,6 +50,7 @@ class PostViewHolder(
             like.text = PostService.checkCounter(post.like)
             share.text = PostService.checkCounter(post.sher)
             videoLink.text = post.linkOnYouTube
+
 
             if (!post.linkOnYouTube.isNullOrEmpty()) {
                 groupForVideo.visibility = View.VISIBLE
@@ -80,6 +83,8 @@ class PostViewHolder(
             like.setOnClickListener { listener.likeOnPost(post) }
 
             share.setOnClickListener { listener.shareOnPost(post) }
+
+            content.setOnClickListener { listener.getPost(post) }
         }
     }
 }

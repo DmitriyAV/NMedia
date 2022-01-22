@@ -14,4 +14,5 @@
     <string name="save">Save</string>
     <string name="add_post">Add</string>
     <string name="videoClicked">Video show</string>
+    <string name="error_empty_content" translatable="false">Content should\'t be empty</string>
 </resources>

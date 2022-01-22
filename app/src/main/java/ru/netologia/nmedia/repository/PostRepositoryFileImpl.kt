@@ -15,7 +15,7 @@ class PostRepositoryFileImpl(
     private val data = MutableLiveData(posts)
     private val gson = Gson()
     private val filename = "post.json"
-    private val type = TypeToken.getParameterized(List::class.java,Post::class.java).type
+    private val type = TypeToken.getParameterized(List::class.java, Post::class.java).type
 
 
     init {
@@ -25,7 +25,9 @@ class PostRepositoryFileImpl(
                 posts = gson.fromJson(it, type)
                 data.value = posts
             }
-        } else { sync() }
+        } else {
+            sync()
+        }
     }
 
     override fun get(): LiveData<List<Post>> = data
@@ -78,6 +80,7 @@ class PostRepositoryFileImpl(
                 )
             ) + posts
             data.value = posts
+            sync()
             return
         } else {
             posts = posts.map {
