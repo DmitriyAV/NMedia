@@ -46,6 +46,4 @@ object PostService {
         df.roundingMode = RoundingMode.FLOOR
         return df.format(counter/1000).toString()
     }
-
-
 }
