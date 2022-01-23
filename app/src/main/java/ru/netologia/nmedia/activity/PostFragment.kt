@@ -1,5 +1,6 @@
 package ru.netologia.nmedia.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,9 +11,11 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import ru.netologia.nmedia.R
 import ru.netologia.nmedia.activity.EditPostFragment.Companion.textArgEdit
+import ru.netologia.nmedia.activity.PostFragment.Companion.longArg
 import ru.netologia.nmedia.databinding.FragmentSinglePostBinding
 import ru.netologia.nmedia.dto.PostService
 import ru.netologia.nmedia.util.PostIdArg
+import ru.netologia.nmedia.util.StringArg
 import ru.netologia.nmedia.viewModel.ViewModelPost
 
 
@@ -60,24 +63,25 @@ class PostFragment : Fragment() {
                         setOnMenuItemClickListener { token ->
                             when (token.itemId) {
                                 R.id.remove_post -> {
-                                    viewModel.removeById(post.id)
+
+                                    arguments?.longArg = post.id
                                     findNavController().navigate(
                                         R.id.action_postFragment_to_feedFragment,
                                         Bundle().apply {
                                             longArg = post.id
                                         }
                                     )
+
                                     true
                                 }
                                 R.id.edit_post -> {
 
-                                    viewModel.edit(post.content)
-                                    findNavController().navigate(
-                                        R.id.action_postFragment_to_editPostFragment,
-                                        Bundle().apply {
-                                            textArgEdit = post.content
-                                        }
-                                    )
+                                    arguments?.textArgEdit = post.content
+                                    Bundle().apply {
+                                        textArgEdit = post.content
+                                    }
+                                    viewModel.editOnPost(post)
+
                                     true
                                 }
                                 else -> false
@@ -90,10 +94,31 @@ class PostFragment : Fragment() {
 
                 like.setOnClickListener { viewModel.likeById(post.id) }
 
-                share.setOnClickListener { viewModel.shareById(post.id) }
+                share.setOnClickListener {
+                    viewModel.shareById(post.id)
+                    val intent = Intent().apply {
+                        action = Intent.ACTION_SEND
+                        putExtra(Intent.EXTRA_TEXT, post.content)
+                        type = "text/plain"
+                    }
+                    val shareContentChooser =
+                        Intent.createChooser(intent, getString(R.string.share))
+
+                    startActivity(shareContentChooser)
+                }
 
             }
-            findNavController().navigateUp()
+
+        }
+
+        viewModel.edited.observe(viewLifecycleOwner) {
+            if (it.id == 0L) {
+                return@observe
+            }
+            findNavController().navigate(
+                R.id.action_postFragment_to_editPostFragment,
+                Bundle().apply { textArgEdit = it.content }
+            )
         }
 
         return binding.root

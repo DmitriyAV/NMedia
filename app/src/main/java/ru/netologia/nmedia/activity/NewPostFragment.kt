@@ -36,7 +36,7 @@ class NewPostFragment : Fragment() {
             val text = binding.newPost.text.toString()
 
             if (text.isNotBlank()) {
-                viewModel.edit(text)
+                viewModel.create(text)
                 viewModel.save()
                 AndroidUtils.hideKeyboard(requireView())
                 findNavController().navigateUp()

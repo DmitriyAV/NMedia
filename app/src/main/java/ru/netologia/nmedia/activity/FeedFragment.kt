@@ -36,6 +36,7 @@ class FeedFragment : Fragment() {
 
         val adapter = PostAdapter(
             object : PostActionListener {
+
                 override fun likeOnPost(post: Post) {
                     viewModel.likeById(post.id)
                 }
@@ -84,7 +85,7 @@ class FeedFragment : Fragment() {
             }
         )
 
-        val id = arguments?.longArg
+        val id = let { arguments?.longArg }
         id?.let { viewModel.removeById(it) }
 
         binding.container.adapter = adapter
