@@ -1,0 +1,13 @@
+package ru.netologia.nmedia.dao
+
+import androidx.lifecycle.LiveData
+import ru.netologia.nmedia.dto.Post
+
+interface PostDao {
+    fun get(): List<Post>
+    fun likeById(id: Long)
+    fun shareById(id: Long)
+    fun removeById(id: Long)
+    fun save(post: Post): Post
+
+}
