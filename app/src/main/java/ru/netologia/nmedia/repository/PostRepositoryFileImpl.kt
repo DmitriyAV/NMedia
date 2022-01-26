@@ -37,10 +37,10 @@ class PostRepositoryFileImpl(
             if (it.id == id) {
                 it.copy(
                     likedByMe = !it.likedByMe,
-                    like = if (!it.likedByMe) {
-                        it.like + 1
+                    likes = if (!it.likedByMe) {
+                        it.likes + 1
                     } else {
-                        it.like - 1
+                        it.likes - 1
                     }
                 )
             } else {
@@ -56,7 +56,8 @@ class PostRepositoryFileImpl(
         data.value = data.value?.map {
             if (it.id == id) {
                 it.copy(
-                    sher = it.sher + 1
+                    share = it.share + 1
+
                 )
             } else it
         }
@@ -74,7 +75,7 @@ class PostRepositoryFileImpl(
         if (post.id == 0L) {
             posts = listOf(
                 post.copy(
-                    id = posts.firstOrNull()?.id?.inc() ?: 0,
+                    id = posts.firstOrNull()?.id?.inc() ?: 1,
                     author = author,
                     published = published
                 )

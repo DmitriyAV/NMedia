@@ -11,11 +11,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import ru.netologia.nmedia.R
 import ru.netologia.nmedia.activity.EditPostFragment.Companion.textArgEdit
-import ru.netologia.nmedia.activity.PostFragment.Companion.longArg
 import ru.netologia.nmedia.databinding.FragmentSinglePostBinding
 import ru.netologia.nmedia.dto.PostService
 import ru.netologia.nmedia.util.PostIdArg
-import ru.netologia.nmedia.util.StringArg
 import ru.netologia.nmedia.viewModel.ViewModelPost
 
 
@@ -46,8 +44,8 @@ class PostFragment : Fragment() {
                 published.text = post.published
                 content.text = post.content
                 like.isChecked = post.likedByMe
-                like.text = PostService.checkCounter(post.like)
-                share.text = PostService.checkCounter(post.sher)
+                like.text = PostService.checkCounter(post.likes)
+                share.text = PostService.checkCounter(post.share)
                 videoLink.text = post.linkOnYouTube
 
 

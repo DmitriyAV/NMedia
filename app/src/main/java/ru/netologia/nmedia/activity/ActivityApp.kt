@@ -7,9 +7,7 @@ import androidx.navigation.findNavController
 import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_INDEFINITE
 import com.google.android.material.snackbar.Snackbar
 import ru.netologia.nmedia.R
-import ru.netologia.nmedia.activity.EditPostFragment.Companion.textArgEdit
 import ru.netologia.nmedia.activity.NewPostFragment.Companion.textArgNewPost
-import ru.netologia.nmedia.activity.PostFragment.Companion.longArg
 import ru.netologia.nmedia.databinding.ActivityAppBinding
 
 
@@ -41,36 +39,6 @@ class ActivityApp : AppCompatActivity() {
                     textArgNewPost = text
                 }
             )
-
-            findNavController(R.id.navigation).navigate(
-                R.id.action_feedFragment_to_editPostFragment,
-                Bundle().apply {
-                    textArgEdit = text
-                }
-            )
-
-            findNavController(R.id.navigation).navigate(
-                R.id.action_postFragment_to_editPostFragment,
-                Bundle().apply {
-                    textArgEdit = text
-                }
-            )
-
-            findNavController(R.id.navigation).navigate(
-                R.id.action_feedFragment_to_postFragment,
-                Bundle().apply {
-                    longArg = text.toLong()
-                }
-
-            )
-
-            findNavController(R.id.navigation).navigate(
-                R.id.action_postFragment_to_editPostFragment,
-                Bundle().apply {
-                    textArgEdit = text
-                }
-            )
-
         }
     }
 }

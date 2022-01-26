@@ -47,8 +47,8 @@ class PostViewHolder(
             published.text = post.published
             content.text = post.content
             like.isChecked = post.likedByMe
-            like.text = PostService.checkCounter(post.like)
-            share.text = PostService.checkCounter(post.sher)
+            like.text = PostService.checkCounter(post.likes)
+            share.text = PostService.checkCounter(post.share)
             videoLink.text = post.linkOnYouTube
 
 

@@ -14,6 +14,7 @@ class PostRepositoryInMemory : PostRepository {
             content = "Освоение новой профессии — это не только открывающиеся возможности и перспективы, но и настоящий вызов самому себе. Приходится выходить из зоны комфорта и перестраивать привычный образ жизни: менять распорядок дня, искать время для занятий, быть готовым к возможным неудачам в начале пути. В блоге рассказали, как избежать стресса на курсах профпереподготовки → http://netolo.gy/fPD",
             published = "23 сентября в 10:12",
             likedByMe = false
+
         ),
         Post(
             id = 8,
@@ -58,6 +59,7 @@ class PostRepositoryInMemory : PostRepository {
             published = "19 сентября в 10:24",
             likedByMe = false
 
+
         ),
         Post(
             id = 2,
@@ -65,6 +67,7 @@ class PostRepositoryInMemory : PostRepository {
             content = "Знаний хватит на всех: на следующей неделе разбираемся с разработкой мобильных приложений, учимся рассказывать истории и составлять PR-стратегию прямо на бесплатных занятиях \uD83D\uDC47",
             published = "18 сентября в 10:12",
             likedByMe = false
+
 
         ),
         Post(
@@ -87,10 +90,10 @@ class PostRepositoryInMemory : PostRepository {
             if (it.id == id) {
                 it.copy(
                     likedByMe = !it.likedByMe,
-                    like = if (!it.likedByMe) {
-                        it.like + 1
+                    likes = if (!it.likedByMe) {
+                        it.likes + 1
                     } else {
-                        it.like - 1
+                        it.likes - 1
                     }
                 )
             } else {
@@ -105,7 +108,7 @@ class PostRepositoryInMemory : PostRepository {
         data.value = data.value?.map {
             if (it.id == id) {
                 it.copy(
-                    sher = it.sher + 1
+                    share = it.share + 1
                 )
             } else it
         }
