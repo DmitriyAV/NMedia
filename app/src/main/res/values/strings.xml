@@ -4,4 +4,15 @@
     <string name="counter_like" translatable="false">1000</string>
     <string name="counter_shared" translatable="false">500</string>
     <string name="counter_view" translatable="false">500</string>
+    <string name="remove_post">Remove</string>
+    <string name="edit_post">Edit</string>
+    <string name="error_blank">Content is empty</string>
+    <string name="avatar" translatable="false">Avatar</string>
+    <string name="like" translatable="false">Like</string>
+    <string name="share">Share</string>
+    <string name="view">View</string>
+    <string name="save">Save</string>
+    <string name="add_post">Add</string>
+    <string name="videoClicked">Video show</string>
+    <string name="error_empty_content" translatable="false">Content should\'t be empty</string>
 </resources>
