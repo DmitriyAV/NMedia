@@ -94,8 +94,8 @@ class PostRepositoryFileImpl(
         sync()
     }
 
-    override fun videoLink() {
-        data.value = posts
+    override fun videoLink(id: Long) {
+        data.value = posts.filter { post -> post.id == id }
         sync()
     }
 

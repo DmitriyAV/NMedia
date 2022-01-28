@@ -6,9 +6,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import ru.netologia.nmedia.db.AppDb
 import ru.netologia.nmedia.dto.Post
-import ru.netologia.nmedia.repository.PostRepositoryFileImpl
 import ru.netologia.nmedia.repository.PostRepository
-import ru.netologia.nmedia.repository.PostRepositorySQLiteImpl
+import ru.netologia.nmedia.repository.PostRepositoryImpl
 
 private val empty = Post(
     0L,
@@ -22,7 +21,7 @@ private val empty = Post(
 
 class ViewModelPost(application: Application) : AndroidViewModel(application) {
 
-    private val repository: PostRepository = PostRepositorySQLiteImpl(AppDb.getInstance(application).postDao)
+    private val repository: PostRepository = PostRepositoryImpl(AppDb.getInstance(application).postDao())
 
     val edited = MutableLiveData(empty)
 
@@ -36,7 +35,7 @@ class ViewModelPost(application: Application) : AndroidViewModel(application) {
 
     fun editOnPost(post: Post) { edited.value = post }
 
-    fun getVideoLink() = repository.videoLink()
+    fun getVideoLink(id: Long) = repository.videoLink(id)
 
 
     fun create(text: String) {

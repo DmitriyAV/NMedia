@@ -88,7 +88,7 @@ class PostFragment : Fragment() {
                     }.show()
                 }
 
-                playVideo.setOnClickListener { viewModel.getVideoLink() }
+                playVideo.setOnClickListener { viewModel.getVideoLink(post.id) }
 
                 like.setOnClickListener { viewModel.likeById(post.id) }
 

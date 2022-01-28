@@ -69,7 +69,7 @@ class FeedFragment : Fragment() {
                 }
 
                 override fun video(post: Post) {
-                    viewModel.getVideoLink()
+                    viewModel.getVideoLink(post.id)
                     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(post.linkOnYouTube))
                     startActivity(intent)
                 }
